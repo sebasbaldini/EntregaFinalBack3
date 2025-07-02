@@ -1,0 +1,25 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata: 
+  name: mi-seridor
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mi-seridor
+  template: 
+    metadata:
+      labels:
+        app: mi-seridor
+
+    spec:
+      containers:
+        - name: mi-seridor
+          image: mi-seridor-node
+          ports:
+          - containerPorts: 3000
+
+    
+
+  
