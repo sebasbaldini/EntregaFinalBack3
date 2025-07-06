@@ -1,25 +1,19 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: mi-seridor
-
+metadata:
+  name: mi-servidor
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: mi-seridor
-  template: 
+      app: mi-servidor
+  template:
     metadata:
       labels:
-        app: mi-seridor
-
+        app: mi-servidor
     spec:
       containers:
-        - name: mi-seridor
-          image: mi-seridor-node
+        - name: mi-servidor
+          image: mi-proyecto-web:latest   
           ports:
-          - containerPorts: 3000
-
-    
-
-  
+            - containerPort: 3000

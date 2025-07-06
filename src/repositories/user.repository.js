@@ -28,4 +28,21 @@ export class UserRepository {
     findById(id) {
         return users.find(user => user.id === id);
     }
+
+    update(id, data) {
+        const index = users.findIndex(user => user.id === id);
+        if (index === -1) return null;
+
+        // Actualizar solo los campos que vienen en data
+        users[index] = { ...users[index], ...data };
+        return users[index];
+    }
+
+    delete(id) {
+        const index = users.findIndex(user => user.id === id);
+        if (index === -1) return false;
+
+        users.splice(index, 1);
+        return true;
+    }
 }

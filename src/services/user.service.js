@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 
 const SALT_ROUNDS = 10;
 
-
 export class UserService {
     constructor(){
         this.userRepo = new UserRepository();
@@ -15,19 +14,18 @@ export class UserService {
     }
 
     registerUser({email, password, username}){
-        const existingUserEmail = this.userRepo.findByEmail(email)
+        const existingUserEmail = this.userRepo.findByEmail(email);
         if(existingUserEmail){
-            throw new Error ("Email already in use")
+            throw new Error ("Email already in use");
         }
-        const existingUserName = this.userRepo.findByUserName(username)
+        const existingUserName = this.userRepo.findByUserName(username);
         if(existingUserName){
-            throw new Error ("UserName already in use")
+            throw new Error ("UserName already in use");
         }
 
         const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
-    
 
-        const newUser = this.userRepo.create ({
+        const newUser = this.userRepo.create({
             email,
             password: hashedPassword,
             username
@@ -51,10 +49,19 @@ export class UserService {
         return {token, user: {id: user.id, username: user.username, email: user.email}};
     }
 
-
     getUserById(id) {
         return this.userRepo.findById(id);
     }
 
-}
+    updateUser(id, data) {
+        // Si se actualiza password, hay que hashearla
+        if (data.password) {
+            data.password = bcrypt.hashSync(data.password, SALT_ROUNDS);
+        }
+        return this.userRepo.update(id, data);
+    }
 
+    deleteUserById(id) {
+        return this.userRepo.delete(id);
+    }
+}

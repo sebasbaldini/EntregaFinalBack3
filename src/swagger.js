@@ -10,13 +10,13 @@ const options = {
             description: 'Documentacion para mostrar mis Endpoints',
             termsOfService: 'https://mi-dominio.com/terminos',
             contact: {
-                name: 'Equoipo de desarrollo Backend',
+                name: 'Equipo de desarrollo Backend',
                 url: 'https://mi-dominio.com/terminos',
                 email: 'contacto@gmail.com',
             },
             license: {
                 name: 'MIT',
-                url: 'httpss://opensource.org/licences/MIT',
+                url: 'https://opensource.org/licenses/MIT',
             },
         },
         servers: [
@@ -26,12 +26,27 @@ const options = {
             },
             {
                 url: 'https://mi-dominio.com',
-                description: 'Serrvidor de produccion',
+                description: 'Servidor de producción',
+            },
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
+        security: [
+            {
+                bearerAuth: [],
             },
         ],
     },
     apis: ['./src/routes/*.js'],
 };
+
 
 const swaggerSpect = swaggerJSDoc(options);
 

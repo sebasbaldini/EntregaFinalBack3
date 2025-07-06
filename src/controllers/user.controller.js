@@ -39,5 +39,41 @@ export class UserController {
     static profileUser(req, res){
         res.json({ message: `Bienvenido ${req.user.username}`, user: req.user})
     }
+    static getById(req, res) {
+        const { id } = req.params;
+        try {
+            const user = userService.getUserById(id);
+            if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+            res.json(user);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    }
+    
+    static delete(req, res) {
+        const { id } = req.params;
+        try {
+            const deleted = userService.deleteUserById(id);
+            if (!deleted) return res.status(404).json({ error: 'Usuario no encontrado' });
+            res.status(204).send(); // 204: No Content
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    }
+    static update(req, res) {
+        const { id } = req.params;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+    
+        try {
+            const updatedUser = userService.updateUser(id, req.body);
+            if (!updatedUser) return res.status(404).json({ error: 'Usuario no encontrado' });
+            res.json(updatedUser);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
+        }
+    }
     
 }
