@@ -26,7 +26,7 @@ Este proyecto es una API REST desarrollada en NodeJS para gestionar usuarios y a
 
 1. Clonar el repositorio:  
    ```bash
-   git clone https://github.com/tuusuario/tu-repo.git // PONER MI GIT CUANDO LO TENGA
+   git clone https://github.com/sebasbaldini/EntregaFinalBack3 
    cd tu-repo
 
 # INSTALAR DEPENDECIAS
@@ -50,5 +50,8 @@ npm test
 # DOCUMENTACION DEL SWAGGER 
 http://localhost:8080/api-doc
 
+
+# LINK DEL REPO EN DOCKER HUB 
+https://hub.docker.com/r/sebasbaldini/backend-clase5
 
 
